@@ -45,7 +45,13 @@ void convertDFSRe(vector<int> &res, TreeNode* root, int index) {
 
 vector<int> convert(TreeNode* root, int height){
 	vector<int> res(1 << height);
-	convertDFSRe(res, root, 0);
+	// if starting with index 1
+	// leftChildIndex = 2 * parentIndex, rightChildIndex = 2 * parentIndex + 1
+	// parentIndex = childIndex / 2;
+	// if starting with index 0
+	// leftChildIndex = 2 * parentIndex + 1, rightChildIndex = 2 * parentIndex + 2
+	//  parentIndex = (childIndex - 1) / 2;
+	convertDFSRe(res, root, 0); 
   return res;
 }
 
