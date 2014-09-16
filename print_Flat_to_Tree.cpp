@@ -24,11 +24,13 @@ void readFile(unordered_map<int, TreeNode *> &lookup, ifstream &fin)
         mgrTreeNode = lookup[mgrVal];
     } else {
         mgrTreeNode = new TreeNode(mgrVal);
+        lookup[mgrVal] = mgrTreeNode;
     }
     if (lookup.find(empVal) != lookup.end()) {
         empTreeNode = lookup[empVal];
     } else {
         empTreeNode = new TreeNode(empVal);
+        lookup[empVal] = empTreeNode;
     }
     empTreeNode->parent = mgrTreeNode;
     mgrTreeNode->children.push_back(empTreeNode);
