@@ -54,7 +54,7 @@ void producer() {
        // generate a job
        ++count;
        cond.notify_all();
-       locker.unlock();
+       locker.unlock(); // unlock is after notify_all
           
    }
 }
@@ -66,7 +66,7 @@ void consumer() {
         // read buffer
         --count;
         cond_prod.notify_all();
-        locker.unlock();
+        locker.unlock(); // unlock is after notify_all
        
      }
 }
