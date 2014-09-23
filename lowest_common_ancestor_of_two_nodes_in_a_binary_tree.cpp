@@ -16,15 +16,18 @@ node of current node.
 //find the lowest common ancestor of a and b in a binary tree
 BTNode* lowestCommonAncestorinBT(BTNode* root, int a, int b )
 {
-    if(root == NULL) return NULL;
-    if(root->left->val == a ||root->left->val==b||root->right->val==a||root->right->val==b)
+    if(root == NULL) {
+        return NULL;
+    }
+    if(root->val == a || root->val == b) {
         return root;
-    else{
-        BTNode* left = lowestCommonAncestorinBT(root->left,a,b);
-        BTNode* right = lowestCommonAncestorinBT(root->right,a,b);
-        if(left&&right) //one node is in the left and the other is in the right
+    } else{
+        BTNode* left = lowestCommonAncestorinBT(root->left, a, b);
+        BTNode* right = lowestCommonAncestorinBT(root->right, a, b);
+        if(left && right) { //one node is in the left and the other is in the right
             return root;
-        else //both in left or both in right
-            return left?left:right; //if both in the left,return left
+        } else { //both in left or both in right
+            return left ? left : right; //if both in the left,return left
+        }
     }
 }
