@@ -1,18 +1,13 @@
 /*
-https://github.com/checkcheckzz/coding-questions/blob/master/problem/Interface.cpp
-
 Implement Iterator interface. Add a new function peek() to return the value of next(),
 but you can't move the pointer. The constructor is defined, as PeekIterator(Iterator iter)
-
 */
-
-class PeekIterator<T> {
-
+template <typename T>
+class PeekIterator {
 public:
-    
     PeekIterator(Iterator<T> iter) {
         it = iter;
-        data = iter.hasNext()? iter.next():NULL;
+        data = iter.hasNext() ? iter.next() : NULL;
     }
 
     bool hasNext() {
@@ -21,21 +16,15 @@ public:
 
     T next() {
         T current = data;
-        data = it.hasNext()? it.next():null;
+        data = it.hasNext() ? it.next() : NULL;
         return current;
     } 
 
     T peek() {
         return data;
     }
-	
+
 private:
-	
-	Iterator<T> it;
-	T data;
-}
-
-
-/*
-
-*/
+    Iterator<T> it;
+    T data;
+};
