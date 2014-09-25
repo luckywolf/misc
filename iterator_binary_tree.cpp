@@ -1,36 +1,36 @@
 using namespace std;
 
-struct TreeNode {
+struct TreeNode{
    int val;
    TreeNode *left, *right;
-   TreeNode(int x): val(x), left(NLLL), right(NULL) {}
+   TreeNode(int x): val(x), left(NULL), right(NULL) {}
 };
 
-templeate <typname T>
-class Iterator<T> {
+template <typname T>
+class Iterator {
 public:
+    void Reset() {}
     bool hasNext() {}
     T next() {}
-    void Reset() {}
 };
 
 enum traversalMethod {INORDER, PREORDER, POSTORDER};
 
-class BinaryTreeIterator : public Iterator {
-
-    BinaryTreeIterator (TreeNode *root, traversalMethod method) {
-        rootBack = root;
-        mtd = method;
-        initialzation(root);
+class BinaryTreeIterator : public Iterator<TreeNode *> {
+public:
+    BinaryTreeIterator(TreeNode *root, traversalMethod method = INORDER) {
+        _root = root;
+        _method = method;
+        initialzation(_root);
     }
 
     void Reset() {
-        stk.clear();
-        initialzation(rootBack);
+        _stk.clear();
+        initialization(_root);
     }
    
     bool hasNext() {
-        return !stk.empty();
+        return !_stk.empty();
     }
    
     TreeNode *next() {
@@ -38,55 +38,61 @@ class BinaryTreeIterator : public Iterator {
             return NULL;
         }
 
-        TreeNode *res = stk.top();
-        stk.pop();
-
-        switch(mtd) {       
-            case INORDER:
-                initialzation (res->right);
-            case PREODER:
+        TreeNode *res = _stk.top();
+        _stk.pop();
+        switch(_method) {       
+            case PREORDER:
                 if (res->right) {
-                    stk.push(res->right);
+                    _stk.push(res->right);
                 }
                 if (res->left) {
-                    stk.push(res->left);
+                    _stk.push(res->left);
                 }
-            case POSTODER:
-                if (!stk.empty()) {
-                    TreeNode *peak = stk.top();
+                break;
+            case POSTORDER:
+                if (!_stk.empty()) {
+                    TreeNode *peak = _stk.top();
                     if (res != peak->right) {
-                        initialzation (peak->right);
+                        initialization(peak->right);
                     }
                 }
+                break;
+            default:  // INORDER
+                initialization(res->right);
+                break;
         }
         return res;
     }
 
-    private: 
-        void initialzation(TreeNode *cur) {
-            swicth(mtd) {
-                case INORDER: 
-                    while (cur != NULL) {
-                        stk.push(cur);
+private: 
+    stack<TreeNode *> _stk;
+    TreeNode *_root;
+    traversalMethod _method;
+
+    void initialization(TreeNode *cur) {
+        swicth(_method) {
+            case PREORDER: 
+                if (cur != NULL) {
+                    _stk.push(cur);
+                }
+                break;
+            case POSTORDER: 
+                while (cur != NULL) {
+                    _stk.push(cur);
+                    if (cur->left) {
                         cur = cur->left;
-                    }
-                case PREORDER: 
-                    if(cur != NULL) {
-                        stk.push(cur);
-                    }      
-                case POSTORDER: 
-                    while(cur != NULL) {
-                        stk.push(cur);
-                        if (cur->left) {
-                            cur = cur->left;
-                        } else {
-                            cur = cur->right;
-                        }                        
-                    }
+                    } else {
+                        cur = cur->right;
+                    }                        
+                }
+                break;
+            default:  // INORDER
+                while (cur != NULL) {
+                    _stk.push(cur);
+                    cur = cur->left;
+                }
+                break;
             }
         }
-
-       stack<TreeNode *> stk;
-       TreeNode *rootBack;
-       traversalMethod mtd;
+    }
 };
