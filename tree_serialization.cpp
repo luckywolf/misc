@@ -18,21 +18,21 @@ void serialize(ofstream& outfile, TreeNode* current)
 {
     if(current == NULL)
     {
-        outfile<<'#';
+        outfile << '#';
         return;
     }
-    outfile<<current->val;
-    serialize(outfile,current->left);
-    serialize(outfile,current->right);
+    outfile << current->val;
+    serialize(outfile, current->left);
+    serialize(outfile, current->right);
 }
 
 void deserialize(ifstream& infile, TreeNode*& current)
 {
     char ch;
-    infile>>ch;
+    infile >> ch;
     if(ch == '#')
         return;
-    current = new TreeNode(current->val);
-    deserialize(infile,current->left);
-    deserialize(infile,current->right);
+    current = new TreeNode(int(ch));
+    deserialize(infile, current->left);
+    deserialize(infile, current->right);
 }
