@@ -13,6 +13,7 @@ public:
     intHeap(int m): _maxSize(m), _size(0), _vec(m) {}
 
     void insert(int val) {
+        assert(_size < _maxSize);
         int i, p;
         _vec[_size++] = val;
         for (int i = _size-1; i > 0 && _vec[p = (i-1)/2] > _vec[i]; i = p) {
