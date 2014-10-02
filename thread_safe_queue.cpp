@@ -13,8 +13,8 @@ class BlockingQueue{
         void push( const T& item){
             unique_lock<mutex> locker(_mutex);
             _queue.push(item);
-            locker.unlock();
             _cond.notify_one(); 
+            locker.unlock();
         }
         T pop(){
             unique_lock<mutex> locker(_mutex);
