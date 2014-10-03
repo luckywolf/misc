@@ -106,6 +106,7 @@ struct BoundedBuffer {
         ++count;
 
         not_empty.notify_one();
+        l.unlock();
     }
 
     int fetch(){
@@ -118,6 +119,7 @@ struct BoundedBuffer {
         --count;
 
         not_full.notify_one();
+        l.unlock();
 
         return result;
     }

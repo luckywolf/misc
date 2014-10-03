@@ -8,19 +8,24 @@ class BlockingQueue{
     private:
         queue<T> _queue;
         mutex _mutex;
-        condition_variable _cond;
+        condition_variable _not_empty, _not_full;
+        int _capacity;
     public:
+        BoundedBuffer(int capacity) : _capacity(capacity), queue() {}
         void push( const T& item){
             unique_lock<mutex> locker(_mutex);
+            _not_full.wait(locker, [this](){return _queue.size() != _capacity; });
             _queue.push(item);
-            _cond.notify_one(); 
+            _not_empty.notify_one(); 
             locker.unlock();
         }
         T pop(){
             unique_lock<mutex> locker(_mutex);
-            _cond.wait(locker, [=](){ return !_queue.empty() ;} );  //lambda function, capture by value
+            _not_empty.wait(locker, [this](){ return !_queue.empty() ;} );  //lambda function, capture by value
             T item = _queue.front();
             _queue.pop();
+            _not_full.notify_one();
+            locker.unlock();
             return item; 
         }
 };
