@@ -2,9 +2,13 @@
 Question: Write a function to implement float sqrt(float value).
 
 Solution 1: Use the binary search
-When the number is greater than 1, its square root is between 1 and itself. If the number is less than 1, its square root is between itself and 1.
-We first initialize the upper and lower bounds of the square root and use the middle point as the test.
-If the square of the middle point is larger than the given number, we reset the upper bound to the middle point. Otherwise, we reset the lower bound to be the middle point. We repeat this until the error is less than a threshold.
+When the number is greater than 1, its square root is between 1 and itself. 
+If the number is less than 1, its square root is between itself and 1.
+We first initialize the upper and lower bounds of the square root and use the 
+middle point as the test. If the square of the middle point is larger than the
+given number, we reset the upper bound to the middle point. Otherwise, we reset
+the lower bound to be the middle point. We repeat this until the error is 
+less than a threshold.
 */
 
 #include <math.h>
