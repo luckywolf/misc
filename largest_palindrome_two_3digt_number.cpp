@@ -25,15 +25,15 @@ bool isPalindrome(int x) {
 
 int largestPalindrome() {
     int max = 0;
-    for (int i = 999; i > 0; --i) {
+    for (int i = 999; i > 99; --i) {
         if (i * 999 < max) {
             break;
         }
-        for (int j = 999; j > 0; --j) {
+        for (int j = 999; j > 99; --j) {
             int temp = i * j;
             if (isPalindrome(temp)) {
                 if (temp > max) {
-                     max = temp;
+                    max = temp;
                 }
                 break;
             }
