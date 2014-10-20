@@ -51,9 +51,9 @@ public:
                 break;
             case POSTORDER:
                 if (!_stk.empty()) {
-                    TreeNode *peak = _stk.top();
-                    if (res != peak->right) {
-                        initialization(peak->right);
+                    TreeNode *peek = _stk.top();
+                    if (res != peek->right) {
+                        initialization(peek->right);
                     }
                 }
                 break;
