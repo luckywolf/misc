@@ -47,7 +47,6 @@ Insert and search costs O(key_length), however the memory requirements of trie i
 #define CHAR_TO_INDEX(c) ((int)c - (int)'a')
  
 // trie node
-typedef struct trie_node trie_node_t;
 struct trie_node {
     int value;
     trie_node_t *children[ALPHABET_SIZE];
@@ -57,24 +56,23 @@ struct trie_node {
 };
  
 // trie ADT
-typedef struct trie trie_t;
 struct trie {
-    trie_node_t *root;
+    trie_node *root;
     int count;
 };
  
 // Returns new trie node (initialized to NULLs)
-trie_node_t *getNode(void)
-{
-    trie_node_t *pNode = NULL;
-    pNode = new trie_node;
-    return pNode;
-}
+// trie_node *getNode()
+// {
+//     trie_node *pNode = NULL;
+//     pNode = new trie_node;
+//     return pNode;
+// }
  
 // Initializes trie (root is dummy node)
 void initialize(trie_t *pTrie)
 {
-    pTrie->root = getNode();
+    pTrie->root = new trie_node;
     pTrie->count = 0;
 }
  
@@ -95,7 +93,7 @@ void insert(trie_t *pTrie, char key[])
         index = CHAR_TO_INDEX(key[level]);
         if( !pCrawl->children[index] )
         {
-            pCrawl->children[index] = getNode();
+            pCrawl->children[index] = new trie_node;
         }
  
         pCrawl = pCrawl->children[index];
