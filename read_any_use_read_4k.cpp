@@ -1,7 +1,7 @@
 class GenericReader {
-  Reader4k reader4k_;
-  int buf_ptr_;
-  char* internal_buf_;
+  Reader4k _reader4k;
+  int _buf_ptr;
+  char* _internal_buf;
   
 public:
   int Read(int n, char* buf) {
@@ -16,29 +16,29 @@ public:
               }
               buf_ptr_ = 0;
               if (bytes_read > remain) {       
-                  memcpy(buf + buf_ptr, internal_buf_, remain);
+                  memcpy(buf + buf_ptr, _internal_buf, remain);
                   count += remain;
-                  buf_ptr_ += remain;
+                  _buf_ptr += remain;
                   return count;
               } else {
                   remain -= bytes_read;
                   count += bytes_read;
-                  buf_ptr_ = -1;
-                  memcpy(buf + buf_ptr, internal_buf_, bytes_read);
+                  _buf_ptr = -1;
+                  memcpy(buf + buf_ptr, _internal_buf, bytes_read);
                   buf_ptr += bytes_read;
               }
-         } else { // we still have stuff in internal_buf_, read those first
-            if (4096 - buf_ptr_ > remain) {
-                memcpy(buf + buf_ptr, internal_buf_ + buf_ptr_, remain);
-                buf_ptr_ += remain;
+         } else { // we still have stuff in _internal_buf, read those first
+            if (4096 - _buf_ptr > remain) {
+                memcpy(buf + buf_ptr, _internal_buf + _buf_ptr, remain);
+                _buf_ptr += remain;
                 count += remain;
                 return count;
             } else {
-                remain -= (4096 - buf_ptr_);
-                count += (4096 - buf_ptr_);
-                memcpy(but + buf_ptr, internal_buf_ + buf_ptr_, 4096 - buf_ptr_);
-                buf_ptr += (4096 - buf_ptr_);
-                buf_ptr_ = -1;
+                remain -= (4096 - _buf_ptr);
+                count += (4096 - _buf_ptr);
+                memcpy(but + buf_ptr, _internal_buf + _buf_ptr, 4096 - _buf_ptr);
+                buf_ptr += (4096 - _buf_ptr);
+                _buf_ptr = -1;
             }       
          }         
       }
