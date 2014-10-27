@@ -10,11 +10,11 @@ public:
       int buf_ptr = 0;
       while (remain > 0) {
           if (buf_ptr_ == -1) {
-              int bytes_read = reader4k.Read(internal_buf_);
+              int bytes_read = _reader4k.Read(_internal_buf);
               if (bytes_read == 0) { // we have exhausted the buffer
                   break;
               }
-              buf_ptr_ = 0;
+              _buf_ptr = 0;
               if (bytes_read > remain) {       
                   memcpy(buf + buf_ptr, _internal_buf, remain);
                   count += remain;
