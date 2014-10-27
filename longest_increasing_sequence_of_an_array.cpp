@@ -1,10 +1,14 @@
 /*
 http://cs-technotes.blogspot.com/2010/12/longest-increasing-sequence-of-array.html?view=sidebar
 
-Given an integer array, return the longest increasing sequence, for instance: for the array {1,3,2,4,3,5,4,6}, the longest increasing sequence is {1,3,4,5,6} 
+Given an integer array, return the longest increasing sequence, for instance: for the array {1,3,2,4,3,5,4,6}, 
+the longest increasing sequence is {1,3,4,5,6} 
 Algorithm: it's a dynamic programming problem, slightly different to longest common sequence.
-scan the array, for each integer a_i, compare it with all previous integers [a_0...a_i-1], if it's larger than a_j, then the length of the sequence that ends with a_j can increase one by adding a_i to that sequence. 
-Therefore, we need one array(s in below code) to record the current max length of sequences which ends with a_i, and we also need one array(path in below code) to record the previous integer's position so that we can print the longest increasing sequence.
+scan the array, for each integer a_i, compare it with all previous integers [a_0...a_i-1], if it's larger than a_j,
+then the length of the sequence that ends with a_j can increase one by adding a_i to that sequence. 
+Therefore, we need one array(s in below code) to record the current max length of sequences which ends with a_i, 
+and we also need one array(path in below code) to record the previous integer's position so that we can print the 
+longest increasing sequence.
 Code:
 */
 
