@@ -1,7 +1,8 @@
 /*
 http://cs-technotes.blogspot.com/2010/11/thread-safe-circular-queue.html?view=sidebar
 
-Implement a circular queue of integers of user-specified size using a simple array. Provide routines to initialize(), enqueue() and dequeue() the queue. Make it thread safe.
+Implement a circular queue of integers of user-specified size using a simple array. Provide routines to initialize(),
+enqueue() and dequeue() the queue. Make it thread safe.
 */
 
 #include<pthread.h> 
