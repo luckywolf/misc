@@ -70,32 +70,25 @@ struct trie {
 // }
  
 // Initializes trie (root is dummy node)
-void initialize(trie_t *pTrie)
-{
-    pTrie->root = new trie_node;
+void initialize(trie_t *pTrie) {
+    pTrie->root = new trie_node();
     pTrie->count = 0;
 }
  
 // If not present, inserts key into trie
 // If the key is prefix of trie node, just marks leaf node
-void insert(trie_t *pTrie, char key[])
-{
-    int level;
-    int length = strlen(key);
+void insert(trie *pTrie, char key[]) {
     int index;
-    trie_node_t *pCrawl;
+    trie_node *pCrawl;
  
     pTrie->count++;
     pCrawl = pTrie->root;
  
-    for( level = 0; level < length; level++ )
-    {
+    for(int level = 0; level < strlen(key); level++) {
         index = CHAR_TO_INDEX(key[level]);
-        if( !pCrawl->children[index] )
-        {
-            pCrawl->children[index] = new trie_node;
+        if( !pCrawl->children[index] ) {
+            pCrawl->children[index] = new trie_node();
         }
- 
         pCrawl = pCrawl->children[index];
     }
  
@@ -104,44 +97,31 @@ void insert(trie_t *pTrie, char key[])
 }
  
 // Returns non zero, if key presents in trie
-int search(trie_t *pTrie, char key[])
-{
-    int level;
-    int length = strlen(key);
+int search(trie *pTrie, char key[]) {
     int index;
-    trie_node_t *pCrawl;
- 
+    trie_node *pCrawl;
     pCrawl = pTrie->root;
- 
-    for( level = 0; level < length; level++ )
-    {
+    for (int level = 0; level < strlen(key); level++) {
         index = CHAR_TO_INDEX(key[level]);
- 
-        if( !pCrawl->children[index] )
-        {
+        if (!pCrawl->children[index]) {
             return 0;
         }
- 
         pCrawl = pCrawl->children[index];
     }
- 
     return (0 != pCrawl && pCrawl->value);
 }
  
 // Driver
-int main()
-{
+int main() {
     // Input keys (use only 'a' through 'z' and lower case)
     char keys[][8] = {"the", "a", "there", "answer", "any", "by", "bye", "their"};
-    trie_t trie;
+    trie trie;
  
     char output[][32] = {"Not present in trie", "Present in trie"};
- 
     initialize(&trie);
  
     // Construct trie
-    for(int i = 0; i < ARRAY_SIZE(keys); i++)
-    {
+    for(int i = 0; i < ARRAY_SIZE(keys); i++) {
         insert(&trie, keys[i]);
     }
  
@@ -150,6 +130,5 @@ int main()
     printf("%s --- %s\n", "these", output[search(&trie, "these")] );
     printf("%s --- %s\n", "their", output[search(&trie, "their")] );
     printf("%s --- %s\n", "thaw", output[search(&trie, "thaw")] );
- 
     return 0;
 }
