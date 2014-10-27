@@ -17,10 +17,11 @@ public class Restaurant{
 class TableManager{
 	HashMap<String, Integer> resWithName;//Used to locate customers.
 	HashMap<Date, HashMap<String, ArrayList>> resWithDate;//Used to check availiability. 
-														//	e.g. Jan.5 -> <11:00 ->Table1>	
-															//				  <11:30  ->Table1>										
+	//	e.g. Jan.5 -> <11:00 ->Table1>	
+       //				  <11:30  ->Table1>										
 	int Table tables;
-	ArrayList<Request> waitingList;//Can be designed as a command pattern.When a cancelation request come, check if there is available spot for customer.
+	ArrayList<Request> waitingList;// Can be designed as a command pattern.When a cancelation request come, 
+	// check if there is available spot for customer.
 
 	int numOfTable;
 	int numOfLarge;
