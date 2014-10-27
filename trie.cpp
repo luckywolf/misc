@@ -29,7 +29,7 @@ The following picture explains construction of trie using keys given in the exam
                  r  e   e
                         |
                         r
-In the picture, every character is of type trie_node_t. For example, the root is of type trie_node_t, and it¡¯s children a, b and t are filled, all other nodes of root will be NULL. Similarly, ¡°a¡± at the next level is having only one child (¡°n¡±), all other children are NULL. The leaf nodes are in blue.
+In the picture, every character is of type trie_node_t. For example, the root is of type trie_node_t, and itÂ¡Â¯s children a, b and t are filled, all other nodes of root will be NULL. Similarly, Â¡Â°aÂ¡Â± at the next level is having only one child (Â¡Â°nÂ¡Â±), all other children are NULL. The leaf nodes are in blue.
 
 Insert and search costs O(key_length), however the memory requirements of trie isO(ALPHABET_SIZE * key_length * N) where N is number of keys in trie. There are efficient representation of trie nodes (e.g. compressed trie, ternary search tree, etc.) to minimize memory requirements of trie.
 
@@ -48,16 +48,17 @@ Insert and search costs O(key_length), however the memory requirements of trie i
  
 // trie node
 typedef struct trie_node trie_node_t;
-struct trie_node
-{
+struct trie_node {
     int value;
     trie_node_t *children[ALPHABET_SIZE];
+    trie_node(): value(0) {
+        children = new trie_node*[ALPHABET_SIZE]();
+    }
 };
  
 // trie ADT
 typedef struct trie trie_t;
-struct trie
-{
+struct trie {
     trie_node_t *root;
     int count;
 };
@@ -66,21 +67,7 @@ struct trie
 trie_node_t *getNode(void)
 {
     trie_node_t *pNode = NULL;
- 
-    pNode = (trie_node_t *)malloc(sizeof(trie_node_t));
- 
-    if( pNode )
-    {
-        int i;
- 
-        pNode->value = 0;
- 
-        for(i = 0; i < ALPHABET_SIZE; i++)
-        {
-            pNode->children[i] = NULL;
-        }
-    }
- 
+    pNode = new trie_node;
     return pNode;
 }
  
