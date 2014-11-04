@@ -20,7 +20,6 @@ public:
     void testFurniture() { 
         m->testMaterial(); 
     }
-} 
 private:
     material* m;
 };
