@@ -9,7 +9,7 @@ struct TreeNode{
 template <typname T>
 class Iterator {
 public:
-    virtual ~Iterator() {};
+    virtual ~Iterator() {}
     virtual void Reset() = 0;
     virtual bool hasNext() = 0;
     virtual T next() = 0;
