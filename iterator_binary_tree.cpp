@@ -9,9 +9,10 @@ struct TreeNode{
 template <typname T>
 class Iterator {
 public:
-    void Reset();
-    bool hasNext();
-    T next();
+    virtual ~Iterator() {};
+    virtual void Reset() = 0;
+    virtual bool hasNext() = 0;
+    virtual T next() = 0;
 };
 
 enum traversalMethod {INORDER, PREORDER, POSTORDER};
